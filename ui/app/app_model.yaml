@@ -1,0 +1,495 @@
+about:
+  date: November 12, 2024 20:02:57
+  recent_changes: works with modified safrs-react-admin
+  version: 0.0.0
+api_root: '{http_type}://{swagger_host}:{port}/{api}'
+authentication: '{system-default}'
+entities:
+  Activity:
+    columns:
+    - label: ' name*'
+      name: name
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR
+    - name: is_service
+      type: Boolean
+    - name: id
+      template: integer
+      type: INTEGER
+    description: Table for student activities.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: name
+    home_template: home_template.html
+    info_list: Table for student activities.
+    label: Activity
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - activity_id
+      name: StudentActivityList
+      resource: StudentActivity
+    type: Activity
+  Course:
+    columns:
+    - label: ' name*'
+      name: name
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR
+    - name: credit_hours
+      template: integer
+      type: INTEGER
+    - name: is_graduate
+      type: Boolean
+    - name: id
+      template: integer
+      type: INTEGER
+    description: Table for courses offered by the school.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: name
+    home_template: home_template.html
+    info_list: Table for courses offered by the school.
+    label: Course
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - course_id
+      name: CourseRequirementList
+      resource: CourseRequirement
+    - direction: tomany
+      fks:
+      - prerequisite_id
+      name: prerequisiteCourseRequirementList
+      resource: CourseRequirement
+    - direction: tomany
+      fks:
+      - course_id
+      name: EnrollmentList
+      resource: Enrollment
+    - direction: tomany
+      fks:
+      - course_id
+      name: ProgramCourseList
+      resource: ProgramCourse
+    - direction: tomany
+      fks:
+      - course_id
+      name: TeacherCourseAssignmentList
+      resource: TeacherCourseAssignment
+    type: Course
+  CourseRequirement:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: course_id
+      template: integer
+      type: INTEGER
+    - name: prerequisite_id
+      template: integer
+      type: INTEGER
+    description: Table for course prerequisites.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    home_template: home_template.html
+    info_list: Table for course prerequisites.
+    label: CourseRequirement
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - course_id
+      name: course
+      resource: Course
+    - direction: toone
+      fks:
+      - prerequisite_id
+      name: prerequisite
+      resource: Course
+    type: CourseRequirement
+  DegreeProgram:
+    columns:
+    - label: ' name*'
+      name: name
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR
+    - name: level
+      template: text
+      type: VARCHAR
+    - name: id
+      template: integer
+      type: INTEGER
+    description: Table for degree programs offered by the school.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: name
+    home_template: home_template.html
+    info_list: Table for degree programs offered by the school.
+    label: DegreeProgram
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - program_id
+      name: ProgramCourseList
+      resource: ProgramCourse
+    type: DegreeProgram
+  Department:
+    columns:
+    - label: ' name*'
+      name: name
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR
+    - name: faculty_count
+      template: integer
+      type: INTEGER
+    - name: id
+      template: integer
+      type: INTEGER
+    description: Table for school departments.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: name
+    home_template: home_template.html
+    info_list: Table for school departments.
+    label: Department
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - department_id
+      name: DepartmentFacultyList
+      resource: DepartmentFaculty
+    type: Department
+  DepartmentFaculty:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: department_id
+      template: integer
+      type: INTEGER
+    - name: teacher_id
+      template: integer
+      type: INTEGER
+    description: Association table for department faculty assignments.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    home_template: home_template.html
+    info_list: Association table for department faculty assignments.
+    label: DepartmentFaculty
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - department_id
+      name: department
+      resource: Department
+    - direction: toone
+      fks:
+      - teacher_id
+      name: teacher
+      resource: Teacher
+    type: DepartmentFaculty
+  Enrollment:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: course_id
+      template: integer
+      type: INTEGER
+    - name: student_id
+      template: integer
+      type: INTEGER
+    - name: enrollment_date
+      type: DATE
+    description: Junction table for student course enrollments.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    home_template: home_template.html
+    info_list: Junction table for student course enrollments.
+    label: Enrollment
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - course_id
+      name: course
+      resource: Course
+    - direction: toone
+      fks:
+      - student_id
+      name: student
+      resource: Student
+    type: Enrollment
+  ProgramCourse:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: course_id
+      template: integer
+      type: INTEGER
+    - name: program_id
+      template: integer
+      type: INTEGER
+    description: Association table for courses required in degree programs.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    home_template: home_template.html
+    info_list: Association table for courses required in degree programs.
+    label: ProgramCourse
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - course_id
+      name: course
+      resource: Course
+    - direction: toone
+      fks:
+      - program_id
+      name: program
+      resource: DegreeProgram
+    type: ProgramCourse
+  Student:
+    columns:
+    - label: ' first_name*'
+      name: first_name
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR
+    - name: last_name
+      template: text
+      type: VARCHAR
+    - name: enrollment_date
+      type: DATE
+    - name: service_activity_count
+      template: integer
+      type: INTEGER
+    - name: is_honor_student
+      type: Boolean
+    - name: id
+      template: integer
+      type: INTEGER
+    description: Table for student information.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: first_name
+    home_template: home_template.html
+    info_list: Table for student information.
+    label: Student
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - student_id
+      name: EnrollmentList
+      resource: Enrollment
+    - direction: tomany
+      fks:
+      - student_id
+      name: StudentActivityList
+      resource: StudentActivity
+    type: Student
+  StudentActivity:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: activity_id
+      template: integer
+      type: INTEGER
+    - name: student_id
+      template: integer
+      type: INTEGER
+    description: Junction table for student involvement in activities.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    home_template: home_template.html
+    info_list: Junction table for student involvement in activities.
+    label: StudentActivity
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - activity_id
+      name: activity
+      resource: Activity
+    - direction: toone
+      fks:
+      - student_id
+      name: student
+      resource: Student
+    type: StudentActivity
+  Teacher:
+    columns:
+    - label: ' first_name*'
+      name: first_name
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR
+    - name: last_name
+      template: text
+      type: VARCHAR
+    - name: hire_date
+      type: DATE
+    - name: id
+      template: integer
+      type: INTEGER
+    description: Table for teacher information.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: first_name
+    home_template: home_template.html
+    info_list: Table for teacher information.
+    label: Teacher
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - teacher_id
+      name: DepartmentFacultyList
+      resource: DepartmentFaculty
+    - direction: tomany
+      fks:
+      - teacher_id
+      name: TeacherCourseAssignmentList
+      resource: TeacherCourseAssignment
+    type: Teacher
+  TeacherCourseAssignment:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: course_id
+      template: integer
+      type: INTEGER
+    - name: teacher_id
+      template: integer
+      type: INTEGER
+    - name: term
+      template: text
+      type: VARCHAR
+    description: Association table for teacher course assignments.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    home_template: home_template.html
+    info_list: Association table for teacher course assignments.
+    label: TeacherCourseAssignment
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - course_id
+      name: course
+      resource: Course
+    - direction: toone
+      fks:
+      - teacher_id
+      name: teacher
+      resource: Teacher
+    type: TeacherCourseAssignment
+settings:
+  HomeJS: /admin-app/home.js
+  max_list_columns: 8
+  style_guide:
+    applicationLocales:
+    - en
+    - es
+    currency_symbol: $
+    currency_symbol_position: left
+    date_format: LL
+    decimal_max: '1000000000'
+    decimal_min: '0'
+    decimal_separator: .
+    edit_on_mode: dblclick
+    exclude_listpicker: false
+    include_translation: false
+    keycloak_client_id: alsclient
+    keycloak_realm: kcals
+    keycloak_url: http://localhost:8080
+    locale: en
+    max_decimal_digits: '4'
+    min_decimal_digits: '2'
+    mode: tab
+    pick_style: list
+    serviceType: OntimizeEE
+    startSessionPath: /auth/login
+    style: light
+    thousand_separator: ','
+    use_keycloak: false

@@ -1,0 +1,127 @@
+{
+    "name": "EduManage",
+    "logo": {
+        "Type": "Logo",
+        "name": "EduManage Logo",
+        "description": "A sleek, modern logo that reflects efficiency and education."
+    },
+    "sections": [
+        {
+            "title": "Welcome to EduManage",
+            "subtitle": "Streamline Your School's Administration",
+            "name": "hero",
+            "label": "Home",
+            "content": "Discover how EduManage can transform your school's administrative processes. With features designed to simplify scheduling, attendance tracking, and communication, EduManage is your go-to solution for efficient school management.",
+            "order": 1,
+            "Type": "Hero",
+            "images": [
+                {
+                    "Type": "Hero",
+                    "name": "School Management Dashboard",
+                    "description": "A preview of EduManage's intuitive user interface."
+                }
+            ]
+        },
+        {
+            "title": "About Us",
+            "subtitle": "Our Mission and Vision",
+            "name": "about",
+            "label": "About",
+            "content": "EduManage was founded with the vision to revolutionize school management by harnessing the power of technology. Our mission is to provide a seamless, intuitive platform that improves the experience for educators, administrators, students, and parents alike.",
+            "order": 2,
+            "Type": "About",
+            "images": [
+                {
+                    "Type": "Infographic",
+                    "name": "Company History Timeline",
+                    "description": "Illustration representing the milestone achievements of EduManage."
+                }
+            ]
+        },
+        {
+            "title": "Our Services",
+            "subtitle": "Comprehensive Solutions for Schools",
+            "name": "services",
+            "label": "Services",
+            "content": "- **Administration Automation**: Simplify routine tasks with automated workflows.\n- **Schedule Management**: Easily create and adjust timetables.\n- **Attendance Tracking**: Monitor student attendance with ease.\n- **Communication Tools**: Foster effective communication between teachers, students, and parents.\n- **Data Security**: Protect sensitive information with our top-notch security measures.",
+            "order": 3,
+            "Type": "Services",
+            "images": [
+                {
+                    "Type": "Gallery",
+                    "name": "Service Overview",
+                    "description": "Collage of images highlighting different facets of EduManage's services."
+                }
+            ]
+        },
+        {
+            "title": "Our Team",
+            "subtitle": "Meet the Minds behind EduManage",
+            "name": "team",
+            "label": "Team",
+            "content": "Our dedicated team of educational professionals and tech innovators work tirelessly to ensure EduManage meets the highest standards of quality and efficiency.",
+            "order": 4,
+            "Type": "Team",
+            "images": [
+                {
+                    "Type": "Headshot",
+                    "name": "Alex Johnson - CEO",
+                    "description": "Picture of the CEO, Alex Johnson."
+                },
+                {
+                    "Type": "Headshot",
+                    "name": "Maria Gomez - CTO",
+                    "description": "Picture of the CTO, Maria Gomez."
+                }
+            ]
+        },
+        {
+            "title": "Testimonials",
+            "subtitle": "Hear from Our Satisfied Clients",
+            "name": "testimonials",
+            "label": "Testimonials",
+            "content": "\"EduManage has transformed the way we run our school. The user-friendly interface and efficient features have saved us countless hours!\" - *Springfield High School*",
+            "order": 5,
+            "Type": "Testimonials",
+            "images": [
+                {
+                    "Type": "Testimonial",
+                    "name": "Springfield High School",
+                    "description": "Image of a Springfield High School event."
+                }
+            ]
+        },
+        {
+            "title": "Contact Us",
+            "subtitle": "Get in Touch",
+            "name": "contact",
+            "label": "Contact",
+            "content": "Have questions or need more information? We'd love to hear from you. Reach us via email at **support@edumanage.com** or call us at **1-800-EDU-MGMT**. Our support team is available 24/7 to assist you.",
+            "order": 6,
+            "Type": "Contact",
+            "images": [
+                {
+                    "Type": "Map",
+                    "name": "Office Location",
+                    "description": "Map showing the location of EduManage's headquarters."
+                }
+            ]
+        },
+        {
+            "title": "Stay Informed",
+            "subtitle": "Latest News & Updates",
+            "name": "news",
+            "label": "News",
+            "content": "Stay up-to-date with the latest trends in school management and education technology. Check back regularly for updates and articles crafted by our experts.",
+            "order": 7,
+            "Type": "News",
+            "images": [
+                {
+                    "Type": "Thumbnail",
+                    "name": "Blog Preview",
+                    "description": "Preview of a recent blog post."
+                }
+            ]
+        }
+    ]
+}

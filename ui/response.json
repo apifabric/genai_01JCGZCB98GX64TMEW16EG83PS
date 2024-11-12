@@ -1,0 +1,86 @@
+{
+    "models": [
+        {
+            "classname": "Student",
+            "code": "class Student(Base):\n    \"\"\"\n    description: Table for student information.\n    \"\"\"\n    __tablename__ = 'student'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    first_name = Column(String)\n    last_name = Column(String)\n    enrollment_date = Column(Date)\n    service_activity_count = Column(Integer, default=0)  # For LogicBank rule\n    is_honor_student = Column(Boolean)\n\n\n\n\n\n\n\n",
+            "description": "Table for student information.",
+            "name": "Student"
+        },
+        {
+            "classname": "Teacher",
+            "code": "class Teacher(Base):\n    \"\"\"\n    description: Table for teacher information.\n    \"\"\"\n    __tablename__ = 'teacher'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    first_name = Column(String)\n    last_name = Column(String)\n    hire_date = Column(Date)\n\n\n\n\n\n\n\n\n",
+            "description": "Table for teacher information.",
+            "name": "Teacher"
+        },
+        {
+            "classname": "Course",
+            "code": "class Course(Base):\n    \"\"\"\n    description: Table for courses offered by the school.\n    \"\"\"\n    __tablename__ = 'course'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    name = Column(String)\n    credit_hours = Column(Integer)\n    is_graduate = Column(Boolean)\n\n\n\n\n\n\n",
+            "description": "Table for courses offered by the school.",
+            "name": "Course"
+        },
+        {
+            "classname": "Enrollment",
+            "code": "class Enrollment(Base):\n    \"\"\"\n    description: Junction table for student course enrollments.\n    \"\"\"\n    __tablename__ = 'enrollment'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    student_id = Column(Integer, ForeignKey('student.id'))\n    course_id = Column(Integer, ForeignKey('course.id'))\n    enrollment_date = Column(Date)\n\n\n\n\n",
+            "description": "Junction table for student course enrollments.",
+            "name": "Enrollment"
+        },
+        {
+            "classname": "DegreeProgram",
+            "code": "class DegreeProgram(Base):\n    \"\"\"\n    description: Table for degree programs offered by the school.\n    \"\"\"\n    __tablename__ = 'degree_program'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    name = Column(String)\n    level = Column(String)  # e.g., Undergraduate, Masters, PhD\n\n\n\n\n\n\n\n",
+            "description": "Table for degree programs offered by the school.",
+            "name": "DegreeProgram"
+        },
+        {
+            "classname": "Department",
+            "code": "class Department(Base):\n    \"\"\"\n    description: Table for school departments.\n    \"\"\"\n    __tablename__ = 'department'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    name = Column(String)\n    faculty_count = Column(Integer, default=0)  # For LogicBank rule\n\n\n\n\n\n\n",
+            "description": "Table for school departments.",
+            "name": "Department"
+        },
+        {
+            "classname": "TeacherCourseAssignment",
+            "code": "class TeacherCourseAssignment(Base):\n    \"\"\"\n    description: Association table for teacher course assignments.\n    \"\"\"\n    __tablename__ = 'teacher_course_assignment'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    teacher_id = Column(Integer, ForeignKey('teacher.id'))\n    course_id = Column(Integer, ForeignKey('course.id'))\n    term = Column(String)\n\n\n\n\n",
+            "description": "Association table for teacher course assignments.",
+            "name": "TeacherCourseAssignment"
+        },
+        {
+            "classname": "Activity",
+            "code": "class Activity(Base):\n    \"\"\"\n    description: Table for student activities.\n    \"\"\"\n    __tablename__ = 'activity'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    name = Column(String)\n    is_service = Column(Boolean)\n\n\n\n\n\n",
+            "description": "Table for student activities.",
+            "name": "Activity"
+        },
+        {
+            "classname": "StudentActivity",
+            "code": "class StudentActivity(Base):\n    \"\"\"\n    description: Junction table for student involvement in activities.\n    \"\"\"\n    __tablename__ = 'student_activity'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    student_id = Column(Integer, ForeignKey('student.id'))\n    activity_id = Column(Integer, ForeignKey('activity.id'))\n\n\n\n\n",
+            "description": "Junction table for student involvement in activities.",
+            "name": "StudentActivity"
+        },
+        {
+            "classname": "CourseRequirement",
+            "code": "class CourseRequirement(Base):\n    \"\"\"\n    description: Table for course prerequisites.\n    \"\"\"\n    __tablename__ = 'course_requirement'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    course_id = Column(Integer, ForeignKey('course.id'))\n    prerequisite_id = Column(Integer, ForeignKey('course.id'))  # Self-reference\n\n\n\n\n",
+            "description": "Table for course prerequisites.",
+            "name": "CourseRequirement"
+        },
+        {
+            "classname": "DepartmentFaculty",
+            "code": "class DepartmentFaculty(Base):\n    \"\"\"\n    description: Association table for department faculty assignments.\n    \"\"\"\n    __tablename__ = 'department_faculty'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    department_id = Column(Integer, ForeignKey('department.id'))\n    teacher_id = Column(Integer, ForeignKey('teacher.id'))\n\n\n\n\n",
+            "description": "Association table for department faculty assignments.",
+            "name": "DepartmentFaculty"
+        },
+        {
+            "classname": "ProgramCourse",
+            "code": "class ProgramCourse(Base):\n    \"\"\"\n    description: Association table for courses required in degree programs.\n    \"\"\"\n    __tablename__ = 'program_course'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    program_id = Column(Integer, ForeignKey('degree_program.id'))\n    course_id = Column(Integer, ForeignKey('course.id'))\n\n\n\n\n",
+            "description": "Association table for courses required in degree programs.",
+            "name": "ProgramCourse"
+        }
+    ],
+    "rules": [
+        {
+            "name": "Student Service Rule",
+            "description": "Ensure a student qualifies as an honor student based on service activity count.",
+            "use_case": "A student cannot be an honor student unless they have more than 2 service activities.",
+            "code": "Rule.count(derive=Student.service_activity_count, as_count_of=StudentActivity, where=lambda row: row.activity.is_service)\nRule.constraint(validate=Student, as_condition=lambda row: row.is_honor_student and row.service_activity_count < 2, error_msg=\"Honor Students must have at least 2 service activities\")"
+        }
+    ],
+    "test_data": "from datetime import date\n\n# Create test data for Students\nstudent1 = Student(first_name='Alex', last_name='Johnson', enrollment_date=date(2020, 1, 15), service_activity_count=3, is_honor_student=True)\nstudent2 = Student(first_name='Beth', last_name='Smith', enrollment_date=date(2019, 5, 20), service_activity_count=1, is_honor_student=False)\nstudent3 = Student(first_name='Cathy', last_name='Brown', enrollment_date=date(2021, 9, 5), service_activity_count=0, is_honor_student=False)\nstudent4 = Student(first_name='David', last_name='White', enrollment_date=date(2018, 2, 22), service_activity_count=4, is_honor_student=True)\n\n# Create test data for Teachers\nteacher1 = Teacher(first_name='John', last_name='Doe', hire_date=date(2010, 8, 15))\nteacher2 = Teacher(first_name='Jane', last_name='Smith', hire_date=date(2015, 3, 10))\nteacher3 = Teacher(first_name='Emily', last_name='Davis', hire_date=date(2018, 11, 1))\nteacher4 = Teacher(first_name='Michael', last_name='Brown', hire_date=date(2012, 6, 23))\n\n# Create test data for Courses\ncourse1 = Course(name='Math 101', credit_hours=3, is_graduate=False)\ncourse2 = Course(name='History 201', credit_hours=4, is_graduate=False)\ncourse3 = Course(name='Physics 301', credit_hours=3, is_graduate=True)\ncourse4 = Course(name='Literature 101', credit_hours=2, is_graduate=False)\n\n# Create test data for Enrollments\nenrollment1 = Enrollment(student_id=1, course_id=1, enrollment_date=date(2020, 1, 16))\nenrollment2 = Enrollment(student_id=2, course_id=2, enrollment_date=date(2019, 5, 21))\nenrollment3 = Enrollment(student_id=3, course_id=3, enrollment_date=date(2021, 9, 6))\nenrollment4 = Enrollment(student_id=4, course_id=4, enrollment_date=date(2018, 2, 23))\n\n# Create test data for Degree Programs\ndegree_program1 = DegreeProgram(name='Bachelor of Science', level='Undergraduate')\ndegree_program2 = DegreeProgram(name='Master of Arts', level='Masters')\ndegree_program3 = DegreeProgram(name='Doctor of Philosophy', level='PhD')\ndegree_program4 = DegreeProgram(name='Bachelor of Arts', level='Undergraduate')\n\n# Create test data for Departments\ndepartment1 = Department(name='Mathematics', faculty_count=0)\ndepartment2 = Department(name='History', faculty_count=0)\ndepartment3 = Department(name='Physics', faculty_count=0)\ndepartment4 = Department(name='English', faculty_count=0)\n\n# Create test data for Teacher Course Assignments\nteacher_course_assignment1 = TeacherCourseAssignment(teacher_id=1, course_id=1, term='Spring 2021')\nteacher_course_assignment2 = TeacherCourseAssignment(teacher_id=2, course_id=2, term='Fall 2021')\nteacher_course_assignment3 = TeacherCourseAssignment(teacher_id=3, course_id=3, term='Spring 2022')\nteacher_course_assignment4 = TeacherCourseAssignment(teacher_id=4, course_id=4, term='Fall 2022')\n\n# Create test data for Activities\nactivity1 = Activity(name='Community Service', is_service=True)\nactivity2 = Activity(name='Math Club', is_service=False)\nactivity3 = Activity(name='Volunteer Tutoring', is_service=True)\nactivity4 = Activity(name='Orchestra', is_service=False)\n\n# Create test data for Student Activities\nstudent_activity1 = StudentActivity(student_id=1, activity_id=1)\nstudent_activity2 = StudentActivity(student_id=2, activity_id=2)\nstudent_activity3 = StudentActivity(student_id=3, activity_id=3)\nstudent_activity4 = StudentActivity(student_id=4, activity_id=4)\n\n# Create test data for Course Requirements\ncourse_requirement1 = CourseRequirement(course_id=2, prerequisite_id=1)\ncourse_requirement2 = CourseRequirement(course_id=3, prerequisite_id=2)\ncourse_requirement3 = CourseRequirement(course_id=4, prerequisite_id=3)\ncourse_requirement4 = CourseRequirement(course_id=1, prerequisite_id=4)\n\n# Create test data for Department Faculty\ndepartment_faculty1 = DepartmentFaculty(department_id=1, teacher_id=1)\ndepartment_faculty2 = DepartmentFaculty(department_id=2, teacher_id=2)\ndepartment_faculty3 = DepartmentFaculty(department_id=3, teacher_id=3)\ndepartment_faculty4 = DepartmentFaculty(department_id=4, teacher_id=4)\n\n# Create test data for Program Courses\nprogram_course1 = ProgramCourse(program_id=1, course_id=1)\nprogram_course2 = ProgramCourse(program_id=2, course_id=2)\nprogram_course3 = ProgramCourse(program_id=3, course_id=3)\nprogram_course4 = ProgramCourse(program_id=4, course_id=4)",
+    "name": "school_mgmt_system"
+}

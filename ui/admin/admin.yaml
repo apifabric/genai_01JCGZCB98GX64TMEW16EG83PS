@@ -1,0 +1,331 @@
+about:
+  date: November 12, 2024 20:02:57
+  recent_changes: works with modified safrs-react-admin
+  version: 0.0.0
+api_root: '{http_type}://{swagger_host}:{port}/{api}'
+authentication: '{system-default}'
+info:
+  number_relationships: 12
+  number_tables: 12
+info_toggle_checked: true
+resources:
+  Activity:
+    attributes:
+    - label: ' name*'
+      name: name
+      search: true
+      sort: true
+    - name: is_service
+      type: Boolean
+    - name: id
+    description: Table for student activities.
+    info_list: Table for student activities.
+    tab_groups:
+    - direction: tomany
+      fks:
+      - activity_id
+      name: StudentActivityList
+      resource: StudentActivity
+    type: Activity
+    user_key: name
+  Course:
+    attributes:
+    - label: ' name*'
+      name: name
+      search: true
+      sort: true
+    - name: credit_hours
+    - name: is_graduate
+      type: Boolean
+    - name: id
+    description: Table for courses offered by the school.
+    info_list: Table for courses offered by the school.
+    tab_groups:
+    - direction: tomany
+      fks:
+      - course_id
+      name: CourseRequirementList
+      resource: CourseRequirement
+    - direction: tomany
+      fks:
+      - prerequisite_id
+      name: prerequisiteCourseRequirementList
+      resource: CourseRequirement
+    - direction: tomany
+      fks:
+      - course_id
+      name: EnrollmentList
+      resource: Enrollment
+    - direction: tomany
+      fks:
+      - course_id
+      name: ProgramCourseList
+      resource: ProgramCourse
+    - direction: tomany
+      fks:
+      - course_id
+      name: TeacherCourseAssignmentList
+      resource: TeacherCourseAssignment
+    type: Course
+    user_key: name
+  CourseRequirement:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: course_id
+    - name: prerequisite_id
+    description: Table for course prerequisites.
+    info_list: Table for course prerequisites.
+    tab_groups:
+    - direction: toone
+      fks:
+      - course_id
+      name: course
+      resource: Course
+    - direction: toone
+      fks:
+      - prerequisite_id
+      name: prerequisite
+      resource: Course
+    type: CourseRequirement
+    user_key: id
+  DegreeProgram:
+    attributes:
+    - label: ' name*'
+      name: name
+      search: true
+      sort: true
+    - name: level
+    - name: id
+    description: Table for degree programs offered by the school.
+    info_list: Table for degree programs offered by the school.
+    tab_groups:
+    - direction: tomany
+      fks:
+      - program_id
+      name: ProgramCourseList
+      resource: ProgramCourse
+    type: DegreeProgram
+    user_key: name
+  Department:
+    attributes:
+    - label: ' name*'
+      name: name
+      search: true
+      sort: true
+    - name: faculty_count
+    - name: id
+    description: Table for school departments.
+    info_list: Table for school departments.
+    tab_groups:
+    - direction: tomany
+      fks:
+      - department_id
+      name: DepartmentFacultyList
+      resource: DepartmentFaculty
+    type: Department
+    user_key: name
+  DepartmentFaculty:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: department_id
+    - name: teacher_id
+    description: Association table for department faculty assignments.
+    info_list: Association table for department faculty assignments.
+    tab_groups:
+    - direction: toone
+      fks:
+      - department_id
+      name: department
+      resource: Department
+    - direction: toone
+      fks:
+      - teacher_id
+      name: teacher
+      resource: Teacher
+    type: DepartmentFaculty
+    user_key: id
+  Enrollment:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: course_id
+    - name: student_id
+    - name: enrollment_date
+      type: DATE
+    description: Junction table for student course enrollments.
+    info_list: Junction table for student course enrollments.
+    tab_groups:
+    - direction: toone
+      fks:
+      - course_id
+      name: course
+      resource: Course
+    - direction: toone
+      fks:
+      - student_id
+      name: student
+      resource: Student
+    type: Enrollment
+    user_key: id
+  ProgramCourse:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: course_id
+    - name: program_id
+    description: Association table for courses required in degree programs.
+    info_list: Association table for courses required in degree programs.
+    tab_groups:
+    - direction: toone
+      fks:
+      - course_id
+      name: course
+      resource: Course
+    - direction: toone
+      fks:
+      - program_id
+      name: program
+      resource: DegreeProgram
+    type: ProgramCourse
+    user_key: id
+  Student:
+    attributes:
+    - label: ' first_name*'
+      name: first_name
+      search: true
+      sort: true
+    - name: last_name
+    - name: enrollment_date
+      type: DATE
+    - name: service_activity_count
+    - name: is_honor_student
+      type: Boolean
+    - name: id
+    description: Table for student information.
+    info_list: Table for student information.
+    tab_groups:
+    - direction: tomany
+      fks:
+      - student_id
+      name: EnrollmentList
+      resource: Enrollment
+    - direction: tomany
+      fks:
+      - student_id
+      name: StudentActivityList
+      resource: StudentActivity
+    type: Student
+    user_key: first_name
+  StudentActivity:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: activity_id
+    - name: student_id
+    description: Junction table for student involvement in activities.
+    info_list: Junction table for student involvement in activities.
+    tab_groups:
+    - direction: toone
+      fks:
+      - activity_id
+      name: activity
+      resource: Activity
+    - direction: toone
+      fks:
+      - student_id
+      name: student
+      resource: Student
+    type: StudentActivity
+    user_key: id
+  Teacher:
+    attributes:
+    - label: ' first_name*'
+      name: first_name
+      search: true
+      sort: true
+    - name: last_name
+    - name: hire_date
+      type: DATE
+    - name: id
+    description: Table for teacher information.
+    info_list: Table for teacher information.
+    tab_groups:
+    - direction: tomany
+      fks:
+      - teacher_id
+      name: DepartmentFacultyList
+      resource: DepartmentFaculty
+    - direction: tomany
+      fks:
+      - teacher_id
+      name: TeacherCourseAssignmentList
+      resource: TeacherCourseAssignment
+    type: Teacher
+    user_key: first_name
+  TeacherCourseAssignment:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: course_id
+    - name: teacher_id
+    - name: term
+    description: Association table for teacher course assignments.
+    info_list: Association table for teacher course assignments.
+    tab_groups:
+    - direction: toone
+      fks:
+      - course_id
+      name: course
+      resource: Course
+    - direction: toone
+      fks:
+      - teacher_id
+      name: teacher
+      resource: Teacher
+    type: TeacherCourseAssignment
+    user_key: id
+settings:
+  HomeJS: /admin-app/home.js
+  max_list_columns: 8
+  style_guide:
+    applicationLocales:
+    - en
+    - es
+    currency_symbol: $
+    currency_symbol_position: left
+    date_format: LL
+    decimal_max: '1000000000'
+    decimal_min: '0'
+    decimal_separator: .
+    detail_mode: tab
+    edit_on_mode: dblclick
+    exclude_listpicker: false
+    include_translation: 'false'
+    keycloak_client_id: alsclient
+    keycloak_realm: kcals
+    keycloak_url: http://localhost:8080
+    locale: en
+    max_decimal_digits: '4'
+    min_decimal_digits: '2'
+    new_mode: dialog
+    pick_style: list
+    row_height: small,
+    serviceType: OntimizeEE
+    startSessionPath: /auth/login
+    style: light
+    thousand_separator: ','
+    use_keycloak: 'false'

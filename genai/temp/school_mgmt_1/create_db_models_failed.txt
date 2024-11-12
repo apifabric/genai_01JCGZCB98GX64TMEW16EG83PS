@@ -1,0 +1,2 @@
+Error creating database from model: November 12, 2024 20:01:55
+name 'db' is not defined
